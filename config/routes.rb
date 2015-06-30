@@ -3,13 +3,13 @@ Rails.application.routes.draw do
 
   root 'songs#index'
     #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-  post "/suggest_song"   => "song#new",      as: :new_song
-  get  "/about_song/:id" => "song#show",     as: :song
-  get  "/songs/:letter"  => "song#letter"    as: :song_letter
+  post "/suggest_song"   => "songs#new",      as: :new_song
+  get  "/about_song/:id" => "songs#show",     as: :song
+  get  "/songs/:letter"  => "songs#letter",    as: :song_letter
   
-  post "/vote"           => "vote#new",      as: :new_vote
+  post "/vote"           => "votes#new",      as: :new_vote
   
-  post "/playlist"       => "playlist#new",  as: :new_playlist
-  get  "/playlist"       => "playlist#show", as: :playlist
+  post "/playlist"       => "playlists#new",  as: :new_playlist
+  get  "/playlist"       => "playlists#show", as: :playlist
 
 end

@@ -52,5 +52,5 @@ class SongsController < ApplicationController
     end
     return sorted_results.to_json
   end
-  end
+
 end
