@@ -1,18 +1,22 @@
 class SongsController < ApplicationController
+  # FIXME
+  skip_before_filter :verify_authenticity_token
+
   def index
     @songs = Song.all
   end
 
   def new
-    spot = SpotifyAPI.new
+    spotify_token = current_user.spotify_data["credentials"]["token"]
+    spot = SpotifyAPI.new (spotify_token)
     spot_track = spot.get_track params[:artist], params[:title]
     if spot_track
       uri = spot_track[1]
-      if current_user.num_of_songs_suggested_this_week <= 4 
+      if true #current_user.num_of_songs_suggested_this_week <= 4 
         song = Song.where(
           artist:       params[:artist],
           title:        params[:title],
-          suggester_id: current_user.id,
+          user_id: current_user.id,
           uri:          uri
         ).first_or_create!
         current_user.votes.create! song: song, value: 1
@@ -22,7 +26,7 @@ class SongsController < ApplicationController
     else
       set_message "No song found, please try again."
     end
-    redirect to("/")
+    redirect_to("/")
   end
 
   def show

@@ -1,10 +1,10 @@
 class Song < ActiveRecord::Base
-  belongs_to :suggester, class_name: "User"
+  belongs_to :user
 
   has_many :votes
   has_many :users, through: :votes
 
-  validates_presence_of :title, :artist, :suggester
+  validates_presence_of :title, :artist
   validates_uniqueness_of :title, scope: :artist
 
   def self.by_sort_letter
