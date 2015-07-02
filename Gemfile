@@ -23,7 +23,6 @@ gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'rollbar'
 
-
 group :development, :test do
   gem 'spring'
 end
